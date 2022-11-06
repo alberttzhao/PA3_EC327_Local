@@ -24,7 +24,7 @@ GameObject::GameObject(Point2D in_loc, int in_id, char in_code)
 }
 
 Point2D GameObject::GetLocation()
-{
+{  
     return location;
 }
 
@@ -41,5 +41,6 @@ char GameObject::GetState()
 void GameObject::ShowStatus()
 {
     cout << display_code << id_num << " at " << location << endl;
+    return;
 }
 

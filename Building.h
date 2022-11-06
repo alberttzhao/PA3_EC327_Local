@@ -1,0 +1,23 @@
+
+#pragma once
+
+#include "GameObject.h"
+#include "Point2D.h"
+
+class Building : public GameObject 
+{
+private:
+    
+    unsigned int trainer_count;
+
+    Building();
+    Building(char in_code, int in_Id, Point2D in_loc);
+
+public:
+
+    void AddOneTrainer();
+    void RemoveOneTrainer();
+    void ShowStatus();
+    bool ShouldBeVisible();
+
+};
