@@ -5,7 +5,7 @@
 
 class GameObject
 {
-private:
+protected:
 
     Point2D location;
     int id_num;
