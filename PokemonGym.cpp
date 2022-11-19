@@ -44,17 +44,34 @@ unsigned int PokemonGym::GetNumBattlesRemaining()
     return num_battle_remaining;
 }
 
+//should be good?
 //wtf is this 
 //do not understand the instruction
 bool PokemonGym::IsAbleToBattle(unsigned int battle_qty, double budget, unsigned int health)
 {
-    if()
+    if(health >= (health_cost_per_battle * battle_qty) && budget >= (PokeDollar_cost_per_battle * battle_qty))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
+//should be good? 
 //what? 
 unsigned int PokemonGym::TrainPokemon(unsigned int battle_units)
 {
-    num_battle_remaining = num_battle_remaining - battle_units;
+    if(battle_units > num_battle_remaining)
+    {
+        return num_battle_remaining * experience_per_battle;
+    }
+    else
+    {
+        num_battle_remaining = num_battle_remaining - battle_units;
+        return num_battle_remaining * experience_per_battle;
+    }
 
 }
 
