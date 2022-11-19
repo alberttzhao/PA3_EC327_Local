@@ -1,4 +1,4 @@
-/*
+
 
 #include <iostream>
 
@@ -17,6 +17,7 @@ PokemonCenter::PokemonCenter() : Building()
 }
 
 //no idea about default if not declared here
+//^ fixed 
 PokemonCenter::PokemonCenter(int in_id, double potion_cost, unsigned int potion_cap, Point2D in_loc)
 {
     id_num = in_id;
@@ -34,7 +35,10 @@ PokemonCenter::PokemonCenter(int in_id, double potion_cost, unsigned int potion_
 //returns false otherwise
 bool PokemonCenter::HasPotions()
 {
-    return true;
+    if(POTIONS_AVAILABLE > 0)
+        return true;
+    else
+        return false;
 }
 
 //this should be right
@@ -43,10 +47,10 @@ unsigned int PokemonCenter::GetNumPotionRemaining()
     return num_potions_remaining;
 }
 
-//no idea if this is right
+//finished but no idea if this is right
 bool PokemonCenter::CanAffordPotion(unsigned int potion, double budget)
 {
-    double total_cost = static_cast<double>(potion) * pokedollar_cost_per_potion;
+    double total_cost = potion * pokedollar_cost_per_potion;
     if(budget > total_cost)
         return true;
     else
@@ -57,17 +61,20 @@ bool PokemonCenter::CanAffordPotion(unsigned int potion, double budget)
 //returns the pokedollar cost for the specified number of potions
 double PokemonCenter::GetPokeDollarCost(unsigned int potion)
 {
-    return 
+    double total_cost = potion * pokedollar_cost_per_potion;
+    return total_cost;
 }
 
 
-//no idea
+//finished it but need to check later
+//fixed it but the instruction might be wrong
+//check later
 unsigned int PokemonCenter::DistributePotion(unsigned int potion_needed)
 {
     if(num_potions_remaining >= potion_needed)
     {
-        num_potions_remaining - potion_needed;
-        return potion_needed;
+        num_potions_remaining = num_potions_remaining - potion_needed;
+        return num_potions_remaining;
     }
     else
     {
@@ -75,17 +82,35 @@ unsigned int PokemonCenter::DistributePotion(unsigned int potion_needed)
     }
 }
 
+//finished but need to check if it is correct
 bool PokemonCenter::Update()
 {
+    if(num_potions_remaining == 0)
+    {
+        state = NO_POTIONS_AVAILABLE;
+        display_code = 'c';
+        cout << "PokemonCenter " << id_num << " has ran out of potions." << endl;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 
 }
 
+//dont know how this works
+//finished but need to check if it is correct
 void PokemonCenter::ShowStatus()
 {
+    cout << "PokemonCenter Status: ";
+    Building::ShowStatus();
+    cout << "PokeDollars per potion: " << pokedollar_cost_per_potion << endl;
+    if(num_potions_remaining <= 1)
+        cout << "has " << num_potions_remaining << " potion remaining." << endl;
+    else
+        cout << "have " << num_potions_remaining << " potions remaining." << endl;
+
     return;
 }
 
-
-
-
-*/

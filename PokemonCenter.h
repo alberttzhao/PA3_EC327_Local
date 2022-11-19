@@ -7,11 +7,6 @@
 
 class PokemonCenter : public Building
 {
-    enum PokemonCenterStates
-    {
-        POTIONS_AVAILABLE = 0,
-        NO_POTIONS_AVAILABLE = 1
-    };
 
 private:
 
@@ -21,6 +16,8 @@ private:
 
 
 public:
+
+
     //default constructor:
     PokemonCenter();
 
@@ -35,4 +32,12 @@ public:
     bool Update();
     void ShowStatus();
 
+    //virtual void ShowStatus();
+
+};
+
+enum PokemonCenterStates
+{
+    POTIONS_AVAILABLE = 0,
+    NO_POTIONS_AVAILABLE = 1
 };
