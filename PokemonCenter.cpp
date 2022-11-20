@@ -35,7 +35,7 @@ PokemonCenter::PokemonCenter(int in_id, double potion_cost, unsigned int potion_
 //returns false otherwise
 bool PokemonCenter::HasPotions()
 {
-    if(POTIONS_AVAILABLE > 0)
+    if(POTIONS_AVAILABLE > 1)
         return true;
     else
         return false;
