@@ -75,7 +75,7 @@ void Trainer::SetupDestination(Point2D dest)
 void Trainer::StartMoving(Point2D dest)
 {
     SetupDestination(dest);
-    if(delta.x == 0 && delta.y == 0) //apparently this would not work
+    if(GetDistanceBetween(location, destination) == 0) //apparently this would not work
     {
         cout << display_code << id_num << ": I'm already there. See?" << endl;
     }
@@ -97,15 +97,16 @@ void Trainer::StartMovingToGym(PokemonGym* gym)
     {
         cout << display_code << id_num << ": My Pokemon have fainted so I can't move to gym... " << endl;
     }
-    else if(delta.x == 0 && delta.y == 0)
+    else if(GetDistanceBetween(location, destination) == 0)
     {
         state = IN_GYM;
+        current_gym = gym;
         cout << display_code << id_num << ": I am already at the PokemonGym! " << endl;
     }
     else
     {
         state = MOVING_TO_GYM;
-        cout << display_code << id_num << ": on my way to gym " <<  gym->GetId();
+        cout << display_code << id_num << ": on my way to gym " <<  gym->GetId() << endl;
     }
 }
 
@@ -116,9 +117,10 @@ void Trainer::StartMovingToCenter(PokemonCenter* center)
     {
         cout << display_code << id_num << ": My pokemon have fainted so I should have gone to the center.." << endl;
     }
-    else if(delta.x == 0 && delta.y == 0)
+    else if(GetDistanceBetween(location, destination) == 0)
     {
         state = AT_CENTER;
+        current_center = center;
         cout << display_code << id_num << ": I am already at the Center! " << endl;
     }
     else
@@ -127,6 +129,7 @@ void Trainer::StartMovingToCenter(PokemonCenter* center)
         cout << display_code << id_num << ": On my way to Center " << center->GetId() << endl;
     }
 }
+
 
 void Trainer::StartBattling(unsigned int num_battles)
 {
@@ -152,7 +155,6 @@ void Trainer::StartBattling(unsigned int num_battles)
         battles_to_buy = num_battles; //?
         //need to add: update the remaining battles in the gym . This will be used when its Update() function is called.
     }
-    
 }
 
 void Trainer::StartRecoveringHealth(unsigned int num_potions)
@@ -393,3 +395,5 @@ bool Trainer::UpdateLocation()
         return false;
     }
 }
+
+

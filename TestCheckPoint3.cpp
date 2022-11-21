@@ -99,8 +99,8 @@ int main()
     Test Checkpoint 1 material above^
     */
     cout << endl << endl << endl;
-    cout << "*************************" << endl;
-    cout << "Test checkpoint 2: " << endl << endl;
+    cout << "**************************************************" << endl;
+    cout << "Test checkpoint 2: " << endl << endl << endl;
 
 
     Building building1; //should print out building default constructed
@@ -211,7 +211,75 @@ int main()
     center2.ShowStatus();
     //now there should be 5 trainers in center2 C1 
 
+
+    /*
+    Test Checkpoint 2 material above^
+    */
+    cout << endl << endl << endl;
+    cout << "*************************************************" << endl;
+    cout << "Test checkpoint 3: " << endl << endl << endl;
     
+
+    //initizing trainer using a default constructor:
+    Trainer trainer1;
+
+    //showing trainer1 status:
+    cout << endl<< endl<< "Default Trainer Constructor: " << endl;
+    trainer1.ShowStatus();
+
+    //showing parametrized constructor:
+    Trainer trainer2('T');
+
+    cout << endl<< "parametrized Trainer Constructor: *with only char: " << endl;
+    trainer2.ShowStatus();
+
+    //overloaded parametrized constructor:
+    //name: Albert, T2, speed: 2, position: 3 4
+    Trainer trainer3("Albert", 2, 'T', 2, position1); 
+
+    cout << endl << "parametrized Trainer Constructor: *with all: " << endl;
+    trainer3.ShowStatus();
+
+    //testing StartMoving(Point2D dest) function:
+    //define a destination location first: 
+    Point2D destination_setup;
+    destination_setup.x = 50;
+    destination_setup.y = 50;
+
+    cout << endl << "testing StartMoving(Point2D dest): *not at the same place:  " << endl;
+    trainer3.StartMoving(destination_setup); 
+    //should print out On my way because position is 3 4 but destination is 50 50
+
+    cout << endl << "testing StartMoving(Point2D dest): *at the same place:  " << endl;
+    Trainer trainer4("Coke", 2, 'T', 2, destination_setup);
+    trainer4.StartMoving(destination_setup);
+    //should print out I'm already there because position is 50 50 but destination is also 50 50
+
+
+    //testing StartMovingToGym(PokemonGym* gym) function:
+    cout << endl << "testing StartMovingToGym(PokemonGym* gym): " << endl;
+    trainer4.StartMovingToGym(&gym2); //gym 2: g1, position: 10 15
+
+    //testing StartMovingToCenter(PokemonCenter* center) function: 
+    cout << endl << "StartMovingToCenter(PokemonCenter* center): " << endl;
+    trainer3.StartMovingToCenter(&center2); //center 2: c1, position: 3 4
+    //trainer 3 is at position 1: 3 4  should print I am already at the center 
+
+    //testing StartBattling(unsigned int num_battles) function:
+    cout << endl << "testing StartBattling(unsigned int num_battles): " << endl;
+    trainer4.StartBattling(7);
+
+    //testing to see if ShowStatus works:
+    cout << endl << "Testing ShowStatus: " << endl;
+    trainer3.ShowStatus(); //should correspond to 3 AT CENTER
+
+    //testing StartRecoveringHealth(unsigned int num_potions) function:
+    cout << endl << "testing StartRecoveringHealth(unsigned int num_potions): " << endl;
+    //using trainer3 since it is inside the center
+    trainer3.StartRecoveringHealth(7); //using 7 potions
+
+    //testin
+
 
     return 0;
 }
