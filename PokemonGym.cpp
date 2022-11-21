@@ -70,7 +70,7 @@ unsigned int PokemonGym::TrainPokemon(unsigned int battle_units)
     else
     {
         num_battle_remaining = num_battle_remaining - battle_units;
-        return num_battle_remaining * experience_per_battle;
+        return battle_units * experience_per_battle;
     }
 
 }
