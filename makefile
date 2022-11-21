@@ -1,6 +1,6 @@
 CC=g++ -std=c++11 -g
 
-OBJS= TestCheckPoint2.o Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o
+OBJS= TestCheckPoint3.o Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o Trainer.o
 
 default: PA3
 
@@ -24,9 +24,13 @@ PokemonCenter.o: PokemonCenter.cpp PokemonCenter.h GameObject.h Point2D.h
 	
 PokemonGym.o: PokemonGym.cpp PokemonGym.h GameObject.h Point2D.h
 	$(CC) -c PokemonGym.cpp -o PokemonGym.o
+	
+Trainer.o: Trainer.cpp Trainer.h GameObject.h Point2D.h Vector2D.h PokemonCenter.h PokemonGym.h
+	$(CC) -c Trainer.cpp -o Trainer.o
 
-checkpoint2: TestCheckPoint2.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o
-	$(CC) -o checkpoint2.exe TestCheckPoint2.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o
+checkpoint3: TestCheckPoint3.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o Trainer.o
+	$(CC) -o checkpoint3.exe TestCheckPoint3.cpp Point2D.o Vector2D.o GameObject.o Building.o PokemonCenter.o PokemonGym.o Trainer.o
+
 
 clean: 
 	rm $(OBJS) PA3 

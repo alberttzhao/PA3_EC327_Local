@@ -173,11 +173,12 @@ void Trainer::StartRecoveringHealth(unsigned int num_potions)
     else
     {
         //the trainer can start recovering health
-        potions_to_buy = num_potions;
+        //potions_to_buy = num_potions;
         //need to add: update the remaining potions in the center. This will be used when its Update() function is called
-
+        
         //add 5 health for every potion used:
-        health = health + (5 * num_potions); //?
+        unsigned int potions_to_buy = current_center->DistributePotion(num_potions);
+        health = health + (5 * potions_to_buy); //?
     }
 }
 
@@ -286,36 +287,48 @@ bool Trainer::Update()
             {
                 state = STOPPED;
                 return true;
+                break;
             }
             else
             {
-                state = MOVING; //is this necessary? 
+                state = MOVING; //is this necessary?
+                return false; 
+                break;
             }
         case 6: //moving_to_gym
-            if(UpdateLocation == true)
+            if(UpdateLocation() == true)
             {
                 state = IN_GYM;
                 return true;
+                break;
             }
             else
             {
                 state = MOVING_TO_GYM;
+                return false;
+                break;
             }
         case 5: //moving to center
             if(UpdateLocation() == true)
             {
                 state = AT_CENTER;
                 return true;
+                break;
             }
             else
             {
                 state = MOVING_TO_CENTER;
+                return false;
+                break;
             }
         case 4: //in gymn
             return false;
+            break;
         case 3: //at center
             return false;
+            break;
         case 7: //battling in gym
+        {
             unsigned int current_health_cost =  current_gym->GetHealthCost(battles_to_buy);
             health = health - current_health_cost;//? reduce Trainer health based on total health cost for the current gym request
 
@@ -332,22 +345,31 @@ bool Trainer::Update()
 
             cout << "** " << name << " gained " << current_experience_gain << " experiences! **" << endl;
 
-            state = AT_CENTER;
+            state = IN_GYM;
             return true;
+            break;
+        }
 
         case 8: //recovering_health
-            /*
+        {
+            unsigned int healthpoints_recovered = potions_to_buy * 5;
+            
 
-            health_recovered = 
-            health = health + StartRecoveringHealth(potions_to_buy);
-
-            unsigned int current_dollar_cost = current_gym->GetPokeDollarCost(battles_to_buy);
+            unsigned int current_dollar_cost = current_center->GetPokeDollarCost(potions_to_buy);
             PokeDollars = PokeDollars - current_dollar_cost;
 
-            cout << 
+            cout << "** " << name << " recovered " << healthpoints_recovered << " experiences! **" << endl;
+            if(potions_to_buy <= 1)
+                cout << "** " << name << " bought " << potions_to_buy << " potion! **" << endl;
+            else 
+                cout << "** " << name << " bought " << potions_to_buy << " potions! **" << endl;
 
-            */
-
+            state = AT_CENTER;
+            return true;
+            break;  
+        }
+        default:
+            return false;
     }
 }
 
