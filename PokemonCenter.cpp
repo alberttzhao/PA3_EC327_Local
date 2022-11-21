@@ -18,7 +18,7 @@ PokemonCenter::PokemonCenter() : Building()
 
 //no idea about default if not declared here
 //^ fixed 
-PokemonCenter::PokemonCenter(int in_id, double potion_cost, unsigned int potion_cap, Point2D in_loc)
+PokemonCenter::PokemonCenter(int in_id, double potion_cost, unsigned int potion_cap, Point2D in_loc) : Building('C',in_id, in_loc)
 {
     id_num = in_id;
     location = in_loc;
@@ -74,11 +74,13 @@ unsigned int PokemonCenter::DistributePotion(unsigned int potion_needed)
     if(num_potions_remaining >= potion_needed)
     {
         num_potions_remaining = num_potions_remaining - potion_needed;
-        return num_potions_remaining;
+        return potion_needed;
     }
     else
     {
-        return num_potions_remaining;
+        unsigned int num_potions_remaining_copy = num_potions_remaining;
+        num_potions_remaining = 0;
+        return num_potions_remaining_copy;
     }
 }
 

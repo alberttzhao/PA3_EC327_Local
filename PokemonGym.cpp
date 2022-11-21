@@ -14,7 +14,7 @@ PokemonGym::PokemonGym() : Building()
     cout << "PokemonGym default constructed" << endl;
 }
 
-PokemonGym::PokemonGym(unsigned int max_battle, unsigned int health_loss, double PokeDollar_cost, unsigned int exp_per_battle, int in_id, Point2D in_loc)
+PokemonGym::PokemonGym(unsigned int max_battle, unsigned int health_loss, double PokeDollar_cost, unsigned int exp_per_battle, int in_id, Point2D in_loc) : Building('G', in_id, in_loc)
 {
     id_num = in_id;
     max_number_of_battles = max_battle;
@@ -110,8 +110,8 @@ bool PokemonGym::passed()
 //should be correct
 void PokemonGym::ShowStatus()
 {
-    cout << "PokemonGymStatus: ";
-    Building::ShowStatus;
+    cout << "PokemonGymStatus: " << endl;
+    Building::ShowStatus();
     cout << "Max number of battles: " << max_number_of_battles << endl;
     cout << "Health cost per battle: " << health_cost_per_battle << endl;
     cout << "PokeDollar per battle: " << PokeDollar_cost_per_battle << endl;

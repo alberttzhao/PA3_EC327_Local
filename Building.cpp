@@ -17,6 +17,7 @@ Building::Building() : GameObject('B')
 
 Building::Building(char in_code, int in_Id, Point2D in_loc) : GameObject(in_loc, in_Id, in_code)
 {
+    trainer_count = 0;
     cout << "Building constructed" << endl;
 }
 
@@ -34,7 +35,7 @@ void Building::RemoveOneTrainer()
 
 void Building::ShowStatus()
 {
-    ShowStatus();
+    GameObject::ShowStatus();
     if(trainer_count == 0 || trainer_count == 1)
     {
         cout << trainer_count << " trainer is in this building" << endl;
